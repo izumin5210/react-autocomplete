@@ -1,16 +1,8 @@
 'use strict';
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var _react = require('react');
 
@@ -24,19 +16,27 @@ var _Autocomplete2 = _interopRequireDefault(_Autocomplete);
 
 var _utils = require('../utils');
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 jest.unmock('../Autocomplete');
 jest.unmock('../utils');
 
 function AutocompleteComponentJSX(extraProps) {
-  return _react2['default'].createElement(_Autocomplete2['default'], _extends({
+  return _react2.default.createElement(_Autocomplete2.default, _extends({
     labelText: 'Choose a state from the US',
     inputProps: { name: "US state" },
-    getItemValue: function (item) {
+    getItemValue: function getItemValue(item) {
       return item.name;
     },
     items: (0, _utils.getStates)(),
-    renderItem: function (item, isHighlighted) {
-      return _react2['default'].createElement(
+    renderItem: function renderItem(item, isHighlighted) {
+      return _react2.default.createElement(
         'div',
         {
           style: isHighlighted ? _utils.styles.highlightedItem : _utils.styles.item,
@@ -151,7 +151,8 @@ describe('Autocomplete keyPress-><character> event handlers', function () {
     var value = '';
     autocompleteWrapper.setProps({ value: value, onChange: function onChange(_, v) {
         value = v;
-      } });
+      }
+    });
 
     autocompleteInputWrapper.get(0).value = 'a';
     autocompleteInputWrapper.simulate('keyPress', { key: 'a', keyCode: 97, which: 97 });
@@ -284,7 +285,8 @@ describe('Autocomplete kewDown->Enter event handlers', function () {
     autocompleteInputWrapper.simulate('focus');
     autocompleteWrapper.setProps({ value: value, onSelect: function onSelect(v) {
         value = v;
-      } });
+      }
+    });
 
     // simulate keyUp of backspace, triggering autocomplete suggestion on an empty string, which should result in nothing highlighted
     autocompleteInputWrapper.simulate('keyUp', { key: 'Backspace', keyCode: 8, which: 8 });
@@ -303,7 +305,8 @@ describe('Autocomplete kewDown->Enter event handlers', function () {
     autocompleteInputWrapper.simulate('focus');
     autocompleteWrapper.setProps({ value: value, onSelect: function onSelect(v) {
         value = v;
-      } });
+      }
+    });
 
     // simulate keyUp of last key, triggering autocomplete suggestion + selection of the suggestion in the menu
     autocompleteInputWrapper.simulate('keyUp', { key: 'r', keyCode: 82, which: 82 });
@@ -311,7 +314,8 @@ describe('Autocomplete kewDown->Enter event handlers', function () {
     // Hit enter, updating state.value with the selected Autocomplete suggestion
     autocompleteInputWrapper.simulate('keyDown', { key: 'Enter', keyCode: 13, which: 13, preventDefault: function preventDefault() {
         defaultPrevented = true;
-      } });
+      }
+    });
     expect(value).toEqual('Arizona');
     expect(autocompleteWrapper.state('isOpen')).toBe(false);
     expect(defaultPrevented).toBe(true);
@@ -383,19 +387,19 @@ describe('Autocomplete#renderMenu', function () {
   });
 
   it('should allow using custom components', function () {
-    var Menu = (function (_React$Component) {
+    var Menu = function (_React$Component) {
       _inherits(Menu, _React$Component);
 
       function Menu() {
         _classCallCheck(this, Menu);
 
-        _get(Object.getPrototypeOf(Menu.prototype), 'constructor', this).apply(this, arguments);
+        return _possibleConstructorReturn(this, (Menu.__proto__ || Object.getPrototypeOf(Menu)).apply(this, arguments));
       }
 
       _createClass(Menu, [{
         key: 'render',
         value: function render() {
-          return _react2['default'].createElement(
+          return _react2.default.createElement(
             'div',
             null,
             this.props.items
@@ -404,21 +408,21 @@ describe('Autocomplete#renderMenu', function () {
       }]);
 
       return Menu;
-    })(_react2['default'].Component);
+    }(_react2.default.Component);
 
-    var Item = (function (_React$Component2) {
+    var Item = function (_React$Component2) {
       _inherits(Item, _React$Component2);
 
       function Item() {
         _classCallCheck(this, Item);
 
-        _get(Object.getPrototypeOf(Item.prototype), 'constructor', this).apply(this, arguments);
+        return _possibleConstructorReturn(this, (Item.__proto__ || Object.getPrototypeOf(Item)).apply(this, arguments));
       }
 
       _createClass(Item, [{
         key: 'render',
         value: function render() {
-          return _react2['default'].createElement(
+          return _react2.default.createElement(
             'div',
             null,
             this.props.item.name
@@ -427,14 +431,14 @@ describe('Autocomplete#renderMenu', function () {
       }]);
 
       return Item;
-    })(_react2['default'].Component);
+    }(_react2.default.Component);
 
     var wrapper = (0, _enzyme.mount)(AutocompleteComponentJSX({
       renderMenu: function renderMenu(items) {
-        return _react2['default'].createElement(Menu, { items: items });
+        return _react2.default.createElement(Menu, { items: items });
       },
       renderItem: function renderItem(item) {
-        return _react2['default'].createElement(Item, { key: item.abbr, item: item });
+        return _react2.default.createElement(Item, { key: item.abbr, item: item });
       }
     }));
     wrapper.setState({ isOpen: true, highlightedIndex: 0 });
